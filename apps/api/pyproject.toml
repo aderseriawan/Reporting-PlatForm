@@ -1,0 +1,14 @@
+[project]
+name = "vapt-api"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi==0.135.2",
+  "reportlab==4.4.4",
+  "uvicorn[standard]==0.42.0",
+  "pydantic==2.12.5"
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
