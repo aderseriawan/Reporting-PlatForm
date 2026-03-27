@@ -17,6 +17,15 @@
       })();
     </script>
     <title>Phisudo VAPT — Security Platform</title>
+    <!-- Prevent flash of wrong theme on load -->
+    <script>
+      try {
+        var t = localStorage.getItem('phisudo-theme');
+        if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch(e) {}
+    </script>
     <!-- CRITICAL: DO NOT REMOVE/MODIFY THIS COMMENT OR THE SCRIPT BELOW -->
     <script src="https://blink.new/auto-engineer.js?projectId=vapt-reporting-platform-utr3y4ac" type="module"></script>
   </head>

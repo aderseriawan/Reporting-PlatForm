@@ -10,6 +10,7 @@ const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
+      {/* darkMode="class" so BlinkUIProvider respects the .dark class we toggle on <html> */}
       <BlinkUIProvider theme="linear" darkMode="class">
         <Toaster />
         <App />
