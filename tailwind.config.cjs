@@ -47,8 +47,18 @@ module.exports = {
         '2xl':['var(--font-size-2xl)',  { lineHeight: 'var(--line-height-heading)' }],
       },
 
+      // ── Brand palette ──────────────────────────────────────────────────────
+      // Accessible as: bg-onyx, text-verdigris, etc.
+      // Also exposed via CSS vars: var(--onyx), var(--verdigris), etc.
+
       // ── Colors ─────────────────────────────────────────────────────────────
       colors: {
+        // Named brand colors
+        onyx:        '#131515',
+        graphite:    '#2B2C28',
+        verdigris:   '#339989',
+        'pearl-aqua':'#7DE2D1',
+        snow:        '#FFFAFB',
         border:     'hsl(var(--border))',
         input:      'hsl(var(--input))',
         ring:       'hsl(var(--ring))',

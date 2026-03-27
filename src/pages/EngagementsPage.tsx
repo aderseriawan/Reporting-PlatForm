@@ -59,11 +59,11 @@ export function EngagementsPage() {
   })
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6 animate-fade-in">
+    <div className="p-6 max-w-7xl mx-auto space-y-5 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Engagements</h1>
-          <p className="text-sm text-muted-foreground mt-1">{engagements.length} total engagements</p>
+          <h1 className="text-[22px] font-semibold text-foreground tracking-tight">Engagements</h1>
+          <p className="text-[13px] text-muted-foreground mt-0.5">{engagements.length} total engagements</p>
         </div>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
@@ -118,11 +118,11 @@ function EngagementCard({ engagement, onDelete }: { engagement: Engagement; onDe
           <Link
             to="/engagements/$id"
             params={{ id: engagement.id }}
-            className="font-semibold text-foreground hover:text-accent transition-colors text-sm leading-snug line-clamp-2 block"
+            className="font-medium text-foreground hover:text-[--verdigris] transition-colors text-[13px] leading-snug line-clamp-2 block"
           >
             {engagement.title}
           </Link>
-          <p className="text-xs text-muted-foreground mt-1">{engagement.client}</p>
+          <p className="text-[12px] text-muted-foreground mt-0.5">{engagement.client}</p>
         </div>
       </div>
 
@@ -146,7 +146,7 @@ function EngagementCard({ engagement, onDelete }: { engagement: Engagement; onDe
         <Link
           to="/engagements/$id"
           params={{ id: engagement.id }}
-          className="text-xs text-accent hover:underline flex items-center gap-1 font-medium"
+          className="text-[12px] font-medium flex items-center gap-1 hover:underline" style={{ color: 'var(--verdigris)' }}
         >
           View details <ArrowRight className="w-3 h-3" />
         </Link>

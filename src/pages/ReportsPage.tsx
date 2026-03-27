@@ -41,11 +41,11 @@ export function ReportsPage() {
   })
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6 animate-fade-in">
+    <div className="p-6 max-w-7xl mx-auto space-y-5 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Reports</h1>
-          <p className="text-sm text-muted-foreground mt-1">{reports.length} reports generated</p>
+          <h1 className="text-[22px] font-semibold text-foreground tracking-tight">Reports</h1>
+          <p className="text-[13px] text-muted-foreground mt-0.5">{reports.length} reports generated</p>
         </div>
         <Button size="sm" onClick={() => setGenerateOpen(true)}>
           <Plus className="w-4 h-4 mr-1.5" />Generate Report

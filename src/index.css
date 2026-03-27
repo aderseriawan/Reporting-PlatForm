@@ -1,15 +1,155 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=IBM+Plex+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+/* ── Google Fonts — Roboto (MUI default) + Roboto Mono ───────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500;600&display=swap');
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   Blink UI Theme CSS
-   REQUIRED for @blinkdotnew/ui components to render correctly.
-   ───────────────────────────────────────────────────────────────────────────── */
+/* ── Blink UI Theme (REQUIRED — must come before Tailwind) ───────────────── */
 @import '@blinkdotnew/ui/styles';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   Phisudo VAPT — Color Palette
+   --onyx:        #131515   (darkest bg, sidebar dark)
+   --graphite:    #2B2C28   (dark surface)
+   --verdigris:   #339989   (primary accent — teal-green)
+   --pearl-aqua:  #7DE2D1   (light accent, highlights)
+   --snow:        #FFFAFB   (near-white background)
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── CSS Custom Properties (raw hex for use outside Tailwind) ──────────────── */
+:root {
+  --onyx:        #131515;
+  --graphite:    #2B2C28;
+  --verdigris:   #339989;
+  --pearl-aqua:  #7DE2D1;
+  --snow:        #FFFAFB;
+}
+
+/* ── Light Mode Tokens ─────────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --background:            0 6% 99%;       /* #FFFAFB snow */
+  --foreground:            180 7% 9%;      /* #131515 onyx */
+
+  /* Cards & Surfaces */
+  --card:                  0 0% 100%;
+  --card-foreground:       180 7% 9%;
+  --popover:               0 0% 100%;
+  --popover-foreground:    180 7% 9%;
+
+  /* Primary — Onyx (dark, authoritative) */
+  --primary:               180 7% 9%;      /* #131515 */
+  --primary-foreground:    0 6% 99%;       /* snow */
+
+  /* Secondary */
+  --secondary:             160 5% 93%;
+  --secondary-foreground:  180 7% 16%;
+
+  /* Muted */
+  --muted:                 160 5% 93%;
+  --muted-foreground:      160 3% 45%;
+
+  /* Accent — Verdigris teal-green */
+  --accent:                168 51% 39%;    /* #339989 */
+  --accent-foreground:     0 0% 100%;
+
+  /* Destructive */
+  --destructive:           0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  /* Border & Input */
+  --border:                160 8% 88%;
+  --input:                 160 8% 88%;
+  --ring:                  168 51% 39%;
+
+  /* Radius */
+  --radius: 0.5rem;
+
+  /* ── Sidebar — Onyx dark ─────────────────────────────────────────────────── */
+  --sidebar:                      180 9% 9%;     /* #131515 onyx */
+  --sidebar-foreground:            160 18% 80%;
+  --sidebar-primary:               168 51% 39%;  /* verdigris */
+  --sidebar-primary-foreground:    0 0% 100%;
+  --sidebar-accent:                170 8% 15%;   /* graphite-ish */
+  --sidebar-accent-foreground:     160 18% 88%;
+  --sidebar-border:                170 8% 17%;
+  --sidebar-ring:                  168 51% 50%;
+
+  /* ── Charts ─────────────────────────────────────────────────────────────── */
+  --chart-1:  0 84% 60%;     /* red — critical */
+  --chart-2:  25 95% 55%;    /* orange — high */
+  --chart-3:  45 93% 48%;    /* amber — medium */
+  --chart-4:  168 51% 39%;   /* verdigris — low/accent */
+  --chart-5:  196 80% 55%;   /* sky — info */
+
+  /* ── Typography ─────────────────────────────────────────────────────────── */
+  --font-sans:  'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:  'Roboto Mono', 'IBM Plex Mono', monospace;
+
+  /* ── Shadows ─────────────────────────────────────────────────────────────── */
+  --shadow-2xs:  0 1px 2px hsl(0 0% 0% / 0.04);
+  --shadow-xs:   0 1px 3px hsl(0 0% 0% / 0.06);
+  --shadow-sm:   0 2px 4px hsl(0 0% 0% / 0.07), 0 1px 2px hsl(0 0% 0% / 0.05);
+  --shadow:      0 2px 8px hsl(0 0% 0% / 0.08), 0 1px 3px hsl(0 0% 0% / 0.06);
+  --shadow-md:   0 4px 12px hsl(0 0% 0% / 0.09), 0 2px 4px hsl(0 0% 0% / 0.06);
+  --shadow-lg:   0 8px 24px hsl(0 0% 0% / 0.10), 0 4px 8px hsl(0 0% 0% / 0.07);
+  --shadow-card: 0 1px 3px hsl(0 0% 0% / 0.07), 0 1px 2px hsl(0 0% 0% / 0.04);
+}
+
+/* ── Dark Mode Tokens ──────────────────────────────────────────────────────── */
+:root.dark,
+.theme-linear.dark,
+.theme-glass.dark,
+.theme-midnight.dark,
+.theme-minimal.dark {
+  --background:            170 8% 12%;     /* near graphite */
+  --foreground:            160 18% 88%;
+
+  --card:                  170 8% 15%;
+  --card-foreground:       160 18% 88%;
+  --popover:               170 8% 15%;
+  --popover-foreground:    160 18% 88%;
+
+  --primary:               168 42% 58%;    /* pearl-aqua-ish for dark */
+  --primary-foreground:    180 9% 9%;
+
+  --secondary:             170 8% 20%;
+  --secondary-foreground:  160 14% 68%;
+
+  --muted:                 170 8% 18%;
+  --muted-foreground:      160 8% 50%;
+
+  --accent:                175 55% 48%;    /* pearl-aqua */
+  --accent-foreground:     180 9% 9%;
+
+  --destructive:           0 72% 55%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border:                170 8% 22%;
+  --input:                 170 8% 22%;
+  --ring:                  175 55% 48%;
+
+  /* Sidebar stays very dark */
+  --sidebar:                      180 9% 7%;
+  --sidebar-foreground:            160 14% 75%;
+  --sidebar-primary:               175 55% 48%;
+  --sidebar-primary-foreground:    180 9% 7%;
+  --sidebar-accent:                170 8% 13%;
+  --sidebar-accent-foreground:     160 14% 82%;
+  --sidebar-border:                170 8% 14%;
+  --sidebar-ring:                  175 55% 55%;
+
+  --chart-1:  0 72% 65%;
+  --chart-2:  25 90% 62%;
+  --chart-3:  45 90% 55%;
+  --chart-4:  175 55% 50%;
+  --chart-5:  196 80% 62%;
+
+  --shadow-card: 0 1px 3px hsl(0 0% 0% / 0.25), 0 1px 2px hsl(0 0% 0% / 0.15);
+}
+
+/* ── Base Styles ───────────────────────────────────────────────────────────── */
 @layer base {
   * {
     @apply border-border;
@@ -17,124 +157,61 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Space Grotesk', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
     letter-spacing: -0.01em;
+    line-height: 1.3;
   }
 }
 
-/* ── Phisudo VAPT — Cybersecurity palette (dark navy + cyan) ──────────────── */
-:root {
-  --background: 210 20% 98%;
-  --foreground: 215 28% 17%;
-  --card: 0 0% 100%;
-  --card-foreground: 215 28% 17%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 215 28% 17%;
-  --primary: 215 28% 17%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 215 28% 17%;
-  --muted: 210 40% 96%;
-  --muted-foreground: 215 16% 47%;
-  --accent: 199 89% 48%;
-  --accent-foreground: 0 0% 100%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-  --border: 214 32% 91%;
-  --input: 214 32% 91%;
-  --ring: 199 89% 48%;
-  --radius: 0.5rem;
-  --sidebar: 215 28% 14%;
-  --sidebar-foreground: 210 40% 90%;
-  --sidebar-primary: 199 89% 55%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 215 28% 20%;
-  --sidebar-accent-foreground: 210 40% 90%;
-  --sidebar-border: 215 28% 22%;
-  --sidebar-ring: 199 89% 55%;
-  --chart-1: 0 72% 51%;
-  --chart-2: 25 95% 53%;
-  --chart-3: 48 96% 53%;
-  --chart-4: 199 89% 48%;
-  --chart-5: 142 71% 45%;
-
-  /* Fonts */
-  --font-sans: 'Space Grotesk', 'DM Sans', sans-serif;
-  --font-serif: Georgia, serif;
-  --font-mono: 'IBM Plex Mono', monospace;
-
-  /* Shadows */
-  --shadow-2xs: 0px 4px 8px -1px hsl(0 0% 0% / 0.05);
-  --shadow-xs: 0px 4px 8px -1px hsl(0 0% 0% / 0.05);
-  --shadow-sm: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 1px 2px -2px hsl(0 0% 0% / 0.10);
-  --shadow: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 1px 2px -2px hsl(0 0% 0% / 0.10);
-  --shadow-md: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 2px 4px -2px hsl(0 0% 0% / 0.10);
-  --shadow-lg: 0px 4px 8px -1px hsl(0 0% 0% / 0.12), 0px 4px 6px -2px hsl(0 0% 0% / 0.10);
-  --shadow-xl: 0px 4px 8px -1px hsl(0 0% 0% / 0.15), 0px 8px 10px -2px hsl(0 0% 0% / 0.10);
-  --shadow-2xl: 0px 4px 8px -1px hsl(0 0% 0% / 0.25);
-  --shadow-card: 0 1px 3px hsl(0 0% 0% / 0.08), 0 1px 2px hsl(0 0% 0% / 0.04);
-
-  /* Misc */
-  --tracking-normal: -0.01em;
-  --spacing: 0.25rem;
+/* ── Utility Classes ───────────────────────────────────────────────────────── */
+.font-mono {
+  font-family: 'Roboto Mono', monospace;
 }
 
-:root.dark,
-.theme-linear.dark,
-.theme-glass.dark,
-.theme-midnight.dark,
-.theme-minimal.dark {
-  --background: 220 26% 10%;
-  --foreground: 210 40% 92%;
-  --card: 220 26% 13%;
-  --card-foreground: 210 40% 92%;
-  --popover: 220 26% 13%;
-  --popover-foreground: 210 40% 92%;
-  --primary: 199 89% 55%;
-  --primary-foreground: 220 26% 10%;
-  --secondary: 220 26% 18%;
-  --secondary-foreground: 210 40% 75%;
-  --muted: 220 26% 16%;
-  --muted-foreground: 215 16% 55%;
-  --accent: 199 89% 48%;
-  --accent-foreground: 0 0% 100%;
-  --destructive: 0 72% 51%;
-  --destructive-foreground: 0 0% 100%;
-  --border: 220 26% 20%;
-  --input: 220 26% 20%;
-  --ring: 199 89% 55%;
-  --sidebar: 220 30% 8%;
-  --sidebar-foreground: 210 40% 85%;
-  --sidebar-primary: 199 89% 55%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 220 26% 14%;
-  --sidebar-accent-foreground: 210 40% 85%;
-  --sidebar-border: 220 26% 16%;
-  --sidebar-ring: 199 89% 55%;
-  --chart-1: 0 72% 60%;
-  --chart-2: 25 95% 60%;
-  --chart-3: 48 96% 60%;
-  --chart-4: 199 89% 60%;
-  --chart-5: 142 71% 55%;
-  --shadow-card: 0 1px 3px hsl(0 0% 0% / 0.20), 0 1px 2px hsl(0 0% 0% / 0.12);
-}
-
+/* ── Page fade-in animation ────────────────────────────────────────────────── */
 .animate-fade-in {
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.25s ease-out both;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-.font-mono {
-  font-family: 'IBM Plex Mono', monospace;
+/* ── Scrollbar (subtle) ────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* ── Reduced motion ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

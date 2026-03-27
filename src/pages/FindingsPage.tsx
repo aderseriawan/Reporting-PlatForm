@@ -65,10 +65,10 @@ export function FindingsPage() {
   })
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-6 animate-fade-in">
+    <div className="p-6 max-w-7xl mx-auto space-y-5 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-bold text-foreground">Findings</h1>
-        <p className="text-sm text-muted-foreground mt-1">{filtered.length} of {findings.length} findings</p>
+        <h1 className="text-[22px] font-semibold text-foreground tracking-tight">Findings</h1>
+        <p className="text-[13px] text-muted-foreground mt-0.5">{filtered.length} of {findings.length} findings</p>
       </div>
 
       {/* Filters */}
@@ -187,11 +187,12 @@ function FilterChip({ label, active, onClick }: { label: string; active: boolean
   return (
     <button
       onClick={onClick}
-      className={`text-xs px-2.5 py-1 rounded-full border transition-all capitalize font-medium ${
+      className={`text-[11px] px-2.5 py-1 rounded-full border transition-all capitalize font-medium ${
         active
-          ? 'bg-foreground text-background border-foreground'
+          ? 'border-transparent text-white'
           : 'border-border text-muted-foreground hover:border-foreground/40 hover:text-foreground'
       }`}
+      style={active ? { background: 'var(--verdigris)' } : {}}
     >
       {label}
     </button>

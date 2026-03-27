@@ -1,9 +1,3 @@
-/**
- * AppSidebar — Dark navy sidebar for Phisudo VAPT platform.
- *
- * Uses @blinkdotnew/ui Sidebar primitives and @tanstack/react-router
- * for active-route detection. Pass this as the `sidebar` prop to Shell.
- */
 import {
   Sidebar,
   SidebarHeader,
@@ -21,9 +15,9 @@ import {
   Bug,
   FileText,
   Settings,
-  Shield,
   Sun,
   Moon,
+  ShieldCheck,
 } from 'lucide-react'
 import { useTheme } from '../../hooks/useTheme'
 
@@ -34,7 +28,6 @@ const mainNavItems = [
   { icon: <Bug             size={16} />, label: 'Findings',    href: '/findings' },
   { icon: <FileText        size={16} />, label: 'Reports',     href: '/reports' },
 ]
-
 const footerNavItems = [
   { icon: <Settings size={16} />, label: 'Settings', href: '/settings' },
 ]
@@ -45,37 +38,43 @@ export function AppSidebar() {
   const currentPath = location.pathname
   const { theme, toggleTheme } = useTheme()
 
-  /** Returns true if the nav item should be highlighted as active */
   const isActive = (href: string) =>
     href === '/' ? currentPath === '/' : currentPath.startsWith(href)
 
   return (
     <Sidebar>
-      {/* ── Brand header ───────────────────────────────────────────────── */}
+      {/* ── Brand ─────────────────────────────────────────────────────────── */}
       <SidebarHeader>
-        <div className="flex items-center gap-2.5 px-1 py-0.5">
-          {/* Shield icon badge */}
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[hsl(var(--sidebar-primary))] text-[hsl(var(--sidebar-primary-foreground))] shadow-sm">
-            <Shield size={16} />
+        <div className="flex items-center gap-3 px-1 py-1">
+          {/* Logo mark */}
+          <div
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg shadow-sm"
+            style={{ background: 'var(--verdigris)' }}
+          >
+            <ShieldCheck size={18} color="#fff" strokeWidth={2} />
           </div>
-
           {/* Brand text */}
           <div className="flex flex-col leading-none">
-            <span className="text-sm font-bold tracking-tight text-[hsl(var(--sidebar-foreground))]">
-              Phisudo VAPT
+            <span
+              className="text-[15px] font-semibold tracking-tight"
+              style={{ color: 'var(--snow)' }}
+            >
+              Phisudo
             </span>
-            <span className="mt-0.5 text-[10px] font-medium uppercase tracking-widest text-[hsl(var(--sidebar-foreground)/0.45)]">
-              Security Platform
+            <span
+              className="text-[10px] font-medium uppercase tracking-widest mt-0.5"
+              style={{ color: 'var(--pearl-aqua)', opacity: 0.75 }}
+            >
+              VAPT Platform
             </span>
           </div>
         </div>
       </SidebarHeader>
 
-      {/* ── Main navigation ────────────────────────────────────────────── */}
+      {/* ── Main nav ──────────────────────────────────────────────────────── */}
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
-
+          <SidebarGroupLabel>Menu</SidebarGroupLabel>
           {mainNavItems.map((item) => (
             <SidebarItem
               key={item.href}
@@ -88,10 +87,9 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      {/* ── Footer — Settings + Theme Toggle ───────────────────────────── */}
+      {/* ── Footer ────────────────────────────────────────────────────────── */}
       <SidebarFooter>
         <SidebarSeparator />
-
         <SidebarGroup>
           {footerNavItems.map((item) => (
             <SidebarItem
@@ -104,39 +102,41 @@ export function AppSidebar() {
           ))}
         </SidebarGroup>
 
-        {/* Theme toggle button */}
-        <div className="px-3 pb-1">
+        {/* Theme toggle */}
+        <div className="px-2 pb-1">
           <button
             onClick={toggleTheme}
             title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm font-medium text-[hsl(var(--sidebar-foreground)/0.65)] hover:text-[hsl(var(--sidebar-foreground))] hover:bg-[hsl(var(--sidebar-accent))] transition-all duration-200"
+            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200"
+            style={{
+              color: 'hsl(var(--sidebar-foreground) / 0.65)',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.background = 'hsl(var(--sidebar-accent))'
+              ;(e.currentTarget as HTMLButtonElement).style.color = 'hsl(var(--sidebar-foreground))'
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.background = ''
+              ;(e.currentTarget as HTMLButtonElement).style.color = 'hsl(var(--sidebar-foreground) / 0.65)'
+            }}
           >
-            {/* Animated icon swap */}
             <span className="relative h-4 w-4 shrink-0 overflow-hidden">
               <Sun
-                size={15}
-                className={`absolute inset-0 transition-all duration-300 ${
-                  theme === 'dark'
-                    ? 'opacity-100 rotate-0 scale-100'
-                    : 'opacity-0 rotate-90 scale-75'
-                }`}
+                size={14}
+                className={`absolute inset-0 transition-all duration-300 ${theme === 'dark' ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-75 rotate-90'}`}
               />
               <Moon
-                size={15}
-                className={`absolute inset-0 transition-all duration-300 ${
-                  theme === 'light'
-                    ? 'opacity-100 rotate-0 scale-100'
-                    : 'opacity-0 -rotate-90 scale-75'
-                }`}
+                size={14}
+                className={`absolute inset-0 transition-all duration-300 ${theme === 'light' ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-75 -rotate-90'}`}
               />
             </span>
-            <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+            <span className="text-[13px]">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
           </button>
         </div>
 
-        {/* Version tag */}
-        <div className="px-3 pb-2 pt-1">
-          <p className="text-[10px] font-medium text-[hsl(var(--sidebar-foreground)/0.40)]">
+        {/* Version */}
+        <div className="px-3 pb-3 pt-0.5">
+          <p className="text-[10px] font-medium tracking-wide" style={{ color: 'hsl(var(--sidebar-foreground) / 0.35)' }}>
             Phisudo VAPT · v1.0.0
           </p>
         </div>
