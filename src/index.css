@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=IBM+Plex+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Blink UI Theme CSS
+   REQUIRED for @blinkdotnew/ui components to render correctly.
+   ───────────────────────────────────────────────────────────────────────────── */
+@import '@blinkdotnew/ui/styles';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Space Grotesk', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* ── Phisudo VAPT — Cybersecurity palette (dark navy + cyan) ──────────────── */
+:root {
+  --background: 210 20% 98%;
+  --foreground: 215 28% 17%;
+  --card: 0 0% 100%;
+  --card-foreground: 215 28% 17%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 215 28% 17%;
+  --primary: 215 28% 17%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 215 28% 17%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 199 89% 48%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 199 89% 48%;
+  --radius: 0.5rem;
+  --sidebar: 215 28% 14%;
+  --sidebar-foreground: 210 40% 90%;
+  --sidebar-primary: 199 89% 55%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 215 28% 20%;
+  --sidebar-accent-foreground: 210 40% 90%;
+  --sidebar-border: 215 28% 22%;
+  --sidebar-ring: 199 89% 55%;
+  --chart-1: 0 72% 51%;
+  --chart-2: 25 95% 53%;
+  --chart-3: 48 96% 53%;
+  --chart-4: 199 89% 48%;
+  --chart-5: 142 71% 45%;
+
+  /* Fonts */
+  --font-sans: 'Space Grotesk', 'DM Sans', sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Shadows */
+  --shadow-2xs: 0px 4px 8px -1px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0px 4px 8px -1px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 1px 2px -2px hsl(0 0% 0% / 0.10);
+  --shadow: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 1px 2px -2px hsl(0 0% 0% / 0.10);
+  --shadow-md: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 2px 4px -2px hsl(0 0% 0% / 0.10);
+  --shadow-lg: 0px 4px 8px -1px hsl(0 0% 0% / 0.12), 0px 4px 6px -2px hsl(0 0% 0% / 0.10);
+  --shadow-xl: 0px 4px 8px -1px hsl(0 0% 0% / 0.15), 0px 8px 10px -2px hsl(0 0% 0% / 0.10);
+  --shadow-2xl: 0px 4px 8px -1px hsl(0 0% 0% / 0.25);
+  --shadow-card: 0 1px 3px hsl(0 0% 0% / 0.08), 0 1px 2px hsl(0 0% 0% / 0.04);
+
+  /* Misc */
+  --tracking-normal: -0.01em;
+  --spacing: 0.25rem;
+}
+
+:root.dark,
+.theme-linear.dark,
+.theme-glass.dark,
+.theme-midnight.dark,
+.theme-minimal.dark {
+  --background: 220 26% 10%;
+  --foreground: 210 40% 92%;
+  --card: 220 26% 13%;
+  --card-foreground: 210 40% 92%;
+  --popover: 220 26% 13%;
+  --popover-foreground: 210 40% 92%;
+  --primary: 199 89% 55%;
+  --primary-foreground: 220 26% 10%;
+  --secondary: 220 26% 18%;
+  --secondary-foreground: 210 40% 75%;
+  --muted: 220 26% 16%;
+  --muted-foreground: 215 16% 55%;
+  --accent: 199 89% 48%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 26% 20%;
+  --input: 220 26% 20%;
+  --ring: 199 89% 55%;
+  --sidebar: 220 30% 8%;
+  --sidebar-foreground: 210 40% 85%;
+  --sidebar-primary: 199 89% 55%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 220 26% 14%;
+  --sidebar-accent-foreground: 210 40% 85%;
+  --sidebar-border: 220 26% 16%;
+  --sidebar-ring: 199 89% 55%;
+  --chart-1: 0 72% 60%;
+  --chart-2: 25 95% 60%;
+  --chart-3: 48 96% 60%;
+  --chart-4: 199 89% 60%;
+  --chart-5: 142 71% 55%;
+  --shadow-card: 0 1px 3px hsl(0 0% 0% / 0.20), 0 1px 2px hsl(0 0% 0% / 0.12);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.font-mono {
+  font-family: 'IBM Plex Mono', monospace;
+}

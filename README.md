@@ -1,105 +1,59 @@
-# Reporting-PlatForm
+# Enhanced Vite React TypeScript Template
 
-Phisudo VAPT Reporting Platform is a full-stack web application for managing VAPT engagements, findings lifecycle, CVSS scoring, AI-assisted narrative refinement, and PDF report export.
+This template includes built-in detection for missing CSS variables between your Tailwind config and CSS files.
 
-## Tech Stack
+## Features
 
-- Frontend: Next.js 15 + React + TypeScript
-- Backend: FastAPI + Pydantic
-- Rich Text Editor: TinyMCE (self-hosted assets)
-- Report Export: ReportLab (PDF)
+- **CSS Variable Detection**: Automatically detects if CSS variables referenced in `tailwind.config.cjs` are defined in `src/index.css`
+- **Enhanced Linting**: Includes ESLint, Stylelint, and custom CSS variable validation
+- **Shadcn/ui**: Pre-configured with all Shadcn components
+- **Modern Stack**: Vite + React + TypeScript + Tailwind CSS
 
-## Main Features
-
-- Authentication flow (`/auth/login`, `/auth/my-profile`)
-- Clients management
-- Projects management
-  - Client PIC name
-  - Client PIC contact
-  - Lead pentester contact
-- Cases management
-  - CVSS v4 matrix input (AV/AC/AT/PR/UI/VC/VI/VA/SC/SI/SA)
-  - Auto-calculated severity, score, and vector
-  - TinyMCE sections for Description, PoC, Threat/Risk, Recommendation, Reference, Retest
-  - AI Refine with preview + cancel/apply workflow
-- Notifications center
-- PDF report export
-  - Draft/Final status option
-  - Watermark based on report status
-  - Version input
-  - Summary + finding details sections
-
-## Project Structure
-
-```text
-.
-├─ apps/
-│  ├─ api/                 # FastAPI backend
-│  │  └─ app/
-│  │     ├─ main.py
-│  │     ├─ store.py
-│  │     ├─ modules/
-│  │     │  ├─ auth/
-│  │     │  ├─ clients/
-│  │     │  ├─ projects/
-│  │     │  ├─ cases/
-│  │     │  ├─ notifications/
-│  │     │  └─ reports/
-│  │     └─ schemas/
-│  └─ web/                 # Next.js frontend
-│     ├─ app/
-│     ├─ components/
-│     ├─ lib/
-│     ├─ public/tinymce/
-│     └─ scripts/
-├─ AGENTS.md
-├─ PRD.md
-└─ ARCHITECTURE.md
-```
-
-## Local Setup
-
-### 1) Backend
+## Available Scripts
 
 ```bash
-cd apps/api
-python -m venv .venv
-.venv\Scripts\activate
-pip install -e .
-python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+# Run all linting (includes CSS variable check)
+npm run lint
+
+# Check only CSS variables
+npm run check:css-vars
+
+# Individual linting
+npm run lint:js    # ESLint
+npm run lint:css   # Stylelint
 ```
 
-### 2) Frontend
+## CSS Variable Detection
 
-```bash
-cd apps/web
-npm install
-npm run start -- -H 127.0.0.1 -p 3001
+The template includes a custom script that:
+
+1. **Parses `tailwind.config.cjs`** to find all `var(--variable)` references
+2. **Parses `src/index.css`** to find all defined CSS variables (`--variable:`)
+3. **Cross-references** them to find missing definitions
+4. **Reports undefined variables** with clear error messages
+
+### Example Output
+
+When CSS variables are missing:
+```
+❌ Undefined CSS variables found in tailwind.config.cjs:
+   --sidebar-background
+   --sidebar-foreground
+   --sidebar-primary
+
+Add these variables to src/index.css
 ```
 
-Open:
-- Web: `http://127.0.0.1:3001`
-- API health: `http://127.0.0.1:8000/health`
+When all variables are defined:
+```
+✅ All CSS variables in tailwind.config.cjs are defined
+```
 
-## Default Demo Account (Sanitized)
+## How It Works
 
-- Username: `analyst`
-- Password: `ChangeMe123!`
+The detection happens during the `npm run lint` command, which will:
+- Exit with error code 1 if undefined variables are found
+- Show exactly which variables need to be added to your CSS file
+- Integrate seamlessly with your development workflow
 
-These are placeholder demo credentials for local development only.
-
-## Key API Endpoints
-
-- Auth: `POST /auth/login`, `GET /auth/my-profile`
-- Dashboard: `GET /dashboard/getSidebarItems`
-- Clients: `GET /clients`, `POST /clients`
-- Projects: `GET /projects`, `POST /projects`, `GET /projects/{id}`
-- Cases: `GET /cases`, `GET /cases/{id}`, `POST /cases`, `PATCH /cases/{id}`, `POST /cases/refine`
-- Notifications: `GET /notifications`, `GET /notifications/unread/count`, `POST /notifications/mark-all-read`
-- Reports: `POST /reports/export`
-
-## Notes
-
-- Current backend uses in-memory store for rapid prototyping.
-- For production, replace with persistent database and secure auth.
-- Sensitive real-world reporting data has been removed from seeded demo content.
+This prevents runtime CSS issues where Tailwind classes reference undefined CSS variables.
